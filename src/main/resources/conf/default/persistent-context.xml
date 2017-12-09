@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+       default-autowire="byName">
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${db.oracle.connection.driver_class}"/>
+        <property name="url" value="${db.connection.url}"/>
+        <property name="username" value="${db.connection.username}"/>
+        <property name="password" value="${db.connection.password}"/>
+        <!-- 连接池启动时的初始值 -->
+        <property name="initialSize" value="5"/>
+        <!-- 最大空闲值.当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止 -->
+        <property name="maxIdle" value="2"/>
+        <!--  最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请 -->
+        <property name="minIdle" value="1"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan">
+            <list>
+                <value>com.gaeainfo.module.*.bo</value>
+            </list>
+        </property>
+        <property name="hibernateProperties" ref="hibernateProperties"/>
+    </bean>
+
+    <bean id="txManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="defaultTimeout" value="5000"/>
+    </bean>
+
+    <aop:aspectj-autoproxy expose-proxy="true"/>
+
+    <tx:annotation-driven transaction-manager="txManager"/>
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="get*" propagation="SUPPORTS" timeout="10" read-only="true"/>
+            <tx:method name="query*" propagation="SUPPORTS" timeout="10" read-only="true"/>
+            <tx:method name="search*" propagation="SUPPORTS" timeout="10" read-only="true"/>
+            <tx:method name="find*" propagation="SUPPORTS" timeout="10" read-only="true"/>
+            <tx:method name="list*" propagation="SUPPORTS" timeout="10" read-only="true"/>
+            <tx:method name="count*" propagation="SUPPORTS" timeout="10" read-only="true"/>
+            <tx:method name="exist*" propagation="SUPPORTS" timeout="10" read-only="true"/>
+            <tx:method name="add*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="create*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="insert*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="save*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="del*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="remove*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="modify*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="execute*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="*" propagation="SUPPORTS" timeout="10" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="gaeaServiceOperation" expression="execution(* com.gaeainfo.module..service.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="gaeaServiceOperation"/>
+    </aop:config>
+</beans>

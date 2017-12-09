@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+    <defaultCache maxElementsInMemory="100000"
+                  eternal="false"
+                  timeToIdleSeconds="120"
+                  timeToLiveSeconds="120"
+                  overflowToDisk="true"
+                  diskSpoolBufferSizeMB="30"
+                  maxElementsOnDisk="1000000"
+                  diskPersistent="true"
+                  diskExpiryThreadIntervalSeconds="120"
+                  memoryStoreEvictionPolicy="LRU"/>
+
+    <Cache name="GaeaDefaultNormal" maxElementsInMemory="100000"
+           eternal="false"
+           overflowToDisk="false"
+           diskPersistent="false"
+           timeToIdleSeconds="600"
+           timeToLiveSeconds="600"
+           diskExpiryThreadIntervalSeconds="600"
+           memoryStoreEvictionPolicy="LRU">
+        <searchable>
+            <searchAttribute name="id" expression="value.getId()"/>
+        </searchable>
+    </Cache>
+
+</ehcache>

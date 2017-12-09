@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	    				   http://www.springframework.org/schema/beans/spring-beans.xsd
+	     				   http://www.springframework.org/schema/data/mongo
+	     				   http://www.springframework.org/schema/data/mongo/spring-mongo.xsd"
+       default-autowire="byName">
+
+    <mongo:mongo-client id="mongoDBReplset" replica-set="${mongo.repl.set}"
+                        credentials="${mongo.repl.user.name}:${mongo.repl.user.pwd}@${mongo.repl.dbname}">
+        <mongo:client-options connections-per-host="${mongo.options.connections.perHost}"
+                              connect-timeout="${mongo.options.connect.timeout}"
+                              max-wait-time="${mongo.options.max.wait.time}"
+                              socket-timeout="${mongo.options.socket.timeout}"
+                              socket-keep-alive="${mongo.options.socket.keep.alive}"
+                              read-preference="${mongo.options.read.preference}"
+                              write-concern="${mongo.options.replset.write.concern}"
+                              threads-allowed-to-block-for-connection-multiplier="${mongo.options.threads.allowedToBlock.forConnectionMultiplier}"/>
+    </mongo:mongo-client>
+
+    <mongo:db-factory id="mongoDBReplsetFactory" mongo-ref="mongoDBReplset" dbname="${mongo.repl.dbname}"
+                      write-concern="REPLICAS_SAFE"/>
+
+    <bean id="mongoOperation" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="mongoDBReplsetFactory"/>
+    </bean>
+</beans>

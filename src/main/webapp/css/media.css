@@ -1,0 +1,109 @@
+﻿/* media */
+/* 横屏 */
+@media screen and (orientation:landscape){
+
+}
+/* 竖屏 */
+@media screen and (orientation:portrait){
+
+}
+/*当浏览器可视部分宽度大于650px小于1200px时（液态布局）*/
+@media screen and (max-width:1325px){
+    .g-hd {
+        height: 58px;}
+    .g-hd .ivu-menu-horizontal {
+        height: 58px !important;
+        line-height: 54px !important;
+    }
+    .g-hd .layout-logo{
+        position: relative;
+        float: left;
+        left: 0px;
+        width: 223px;
+        height: 58px;
+        padding-left: 70px;
+        border-radius: 3px;
+        color: #fff;
+        font-size: 17px;
+        /* background: url(../assets/images/logo.png) no-repeat left center; */
+        background:url(../assets/images/logo.png);
+        background-size: 50px auto;
+        background-repeat:no-repeat;
+    }
+    /* 导航栏左距减小 */
+    .g-hd .layout-nav{
+        position: absolute;
+        right: 180px;
+    }
+    /* 导航栏间距减小 */
+    .g-hd .ivu-menu-horizontal .ivu-menu-item, .ivu-menu-horizontal .ivu-menu-submenu{
+        float: left;
+        padding: 0 8px;
+        position: relative;
+        cursor: pointer;
+        z-index: 3;
+        transition: all .2s ease-in-out;
+    }
+    /* 导航栏字体变小 */
+    .g-hd .ivu-menu-item {
+        font-size: 15px;
+    }
+    .g-hd .login {
+        position: absolute;
+        top: 13px;
+        right: 10px;
+        width: 32px;
+        height: 32px;
+        background: url(../assets/images/login.png);
+        background-size: 32px auto;
+        background-repeat: no-repeat;
+    }
+    .g-hd .logout {
+        position: absolute;
+        top: 13px;
+        right: 10px;
+        width: 32px;
+        height: 32px;
+        background: url(../assets/images/logout.png);
+        background-size: 32px auto;
+        background-repeat: no-repeat;
+    }
+}
+/* 窗口宽度<768,设计宽度=640 */
+@media screen and (max-width:767px){
+
+}
+/*当浏览器可视部分宽度小于650px时（单栏布局）*/
+@media screen and (max-width:1024px){
+    /* 头部 */
+    .g-hd{
+       
+    }
+    .ivu-menu .ivu-menu-dark .ivu-menu-horizontal{
+        position: static;
+    }
+    .ivu-menu .ivu-menu-light .ivu-menu-horizontal{
+        position: static;
+    }
+    .g-bd .g-mn{
+        width: auto;
+    }
+}
+/* 窗口宽度<480,设计宽度=320 */
+@media screen and (max-width:479px){
+    html {
+        -webkit-text-size-adjust: none;
+    }
+    .layout-nav li{
+        font-size: 90%;
+        padding: 10px 8px;
+    }
+}
+/* windows UI 贴靠 */
+@media screen and (-ms-view-state:snapped){
+
+}
+/* 打印 */
+@media print{
+
+}

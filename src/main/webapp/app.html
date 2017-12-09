@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <title>徐州PGIS开放平台</title>
+
+    <link rel="stylesheet" href="./libs/gm/gl/gl.css" />
+    <link rel="stylesheet" href="./libs/iview/iview.css" />
+    <link rel="stylesheet" href="./css/global.css" />
+    <link rel="stylesheet" href="./css/media.css" />
+
+    <script type="text/javascript" src="./libs/gm/gl/gl.js"></script>
+    <script type="text/javascript" src="./libs/iview/iview.min.js"></script>
+    <script type="text/javascript" src="libs/jquery/js/jquery-2.1.1.min.js"></script>
+
+    <script src="libs/vue-router.js"></script>
+    <script src="libs/httpVueLoader.js"></script>
+    <script src="libs/vue-script2.js"></script>
+
+</head>
+
+<body>
+    <!--container-->
+    <div id="app" class="g-doc">
+        <!--header-->
+        <div class="g-hd">
+            <div :class="{layout: navItemsShow}">
+                <gaea-menu mode="horizontal" theme="dark" active-name="1" @on-select="navSelect">
+                    <div class="layout-logo" v-text="systemName" @mouseover="hideNavItem"></div>
+                    <div class="layout-nav">
+                        <gaea-menu-item v-for="nav in navs" :name="nav.name">
+                            <div @mouseover="showNavItem(nav.name)" v-text="nav.value"></div>
+                        </gaea-menu-item>
+                    </div>
+                    <div class="layout-user" v-text="userName" @mouseover="hideNavItem"></div>
+                    <div v-if="needLogin" class="login" @click="login" @mouseover="hideNavItem"></div>
+                    <div v-else class="logout" @click="logout" @mouseover="hideNavItem"></div>
+                </gaea-menu>
+                <gaea-menu mode="horizontal" v-if='navItemsShow'>
+                    <transition name="fade">
+                        <div class="layout-assistant" v-if="navItemsShow" @mouseover="showNavItem('selectNavItem')">
+                            <div style="display:inline-block;">
+                                <gaea-menu-item v-for="navItem in navItems" :name="navItem.name" v-text="navItem.value"></gaea-menu-item>
+                            </div>
+                        </div>
+                    </transition>
+                </gaea-menu>
+            </div>
+        </div>
+        <!--content-->
+        <div class="g-bd" @mouseover="hideNavItem">
+            <router-view :param-data="paramData"></router-view>
+        </div>
+        <!--footer-->
+        <div class="g-ft" v-if="showFooter">
+            <p v-text="footerItem1"></p>
+            <div v-text="footerItem2"></div>
+        </div>
+    </div>
+
+    <script src="js/commonUtils.js"></script>
+    <script src="js/popup-coms.js"></script>
+    <script src="js/router-map.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
