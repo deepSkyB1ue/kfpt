@@ -5,7 +5,7 @@ import com.gaeainfo.framework.core.basic.dto.BaseResponseDto;
 import com.gaeainfo.module.base.annotation.CheckRequestToken;
 import com.gaeainfo.module.base.bo.GaeaToken;
 import com.gaeainfo.module.base.service.CheckTokenService;
-import com.gaeainfo.module.test.bo.Ouser;
+import com.gaeainfo.module.test.entity.Ouser;
 import com.gaeainfo.module.test.service.OracleUserService;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.FileUtils;

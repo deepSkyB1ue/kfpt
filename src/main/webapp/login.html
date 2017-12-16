@@ -1,12 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+    <title>徐州公安地理大数据平台</title>
+    <link rel="icon" href="./assets/images/logo.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="./libs/gm/gl/gl.css"/>
+    <link rel="stylesheet" href="./libs/iview/iview.css"/>
+    <link rel="stylesheet" href="./css/global.css"/>
+    <link rel="stylesheet" href="./css/media.css"/>
+
+    <script type="text/javascript" src="./libs/gm/gl/gl.js"></script>
+    <script type="text/javascript" src="./libs/iview/iview.min.js"></script>
+    <script type="text/javascript" src="libs/axios/axios.min.js"></script>
+    <script type="text/javascript" src="libs/jquery/js/jquery-2.1.1.min.js"></script>
+
+    <script src="libs/vue-router.js"></script>
+    <script src="libs/httpVueLoader.js"></script>
+    <script src="libs/vue-script2.js"></script>
+
 </head>
+
 <body>
-<div>
-    <h1>LOGIN PAGE</h1>
+<div class="g-login-dic">
+    <div class="g-mn">
+        <div class="logo"></div>
+        <div class="title">徐州公安地理大数据平台</div>
+        <div class="contentDiv">
+            <h2>用户登录</h2>
+            <h5>欢迎登录地理大数据平台</h5>
+            <div class="line"></div>
+            <gaea-form ref="formInline" :model="formInline" :rules="ruleInline" inline>
+                <gaea-form-item prop="user">
+                    <gaea-input type="text" v-model="formInline.user" placeholder="请输入用户名" autofocus
+                                @on-enter="focusPwd">
+                        <gaea-icon type="android-person" slot="prepend" color="#fff" size="35"></gaea-icon>
+                    </gaea-input>
+                </gaea-form-item>
+                <gaea-form-item prop="password">
+                    <gaea-input id="loginPwd" type="password" v-model="formInline.password" placeholder="请输入密码"
+                                @on-enter="handleSubmit('formInline')">
+                        <gaea-icon type="android-unlock" slot="prepend" color="#fff" size="35"></gaea-icon>
+                    </gaea-input>
+                </gaea-form-item>
+                <gaea-form-item>
+                    <gaea-button type="primary" @click="handleSubmit('formInline')">登录</gaea-button>
+                </gaea-form-item>
+            </gaea-form>
+        </div>
+    </div>
 </div>
+<script src="js/commonUtils.js"></script>
+<script src="js/login.js"></script>
 </body>
+
 </html>

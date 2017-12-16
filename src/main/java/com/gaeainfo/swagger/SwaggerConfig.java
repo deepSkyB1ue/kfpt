@@ -19,7 +19,7 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 @EnableSwagger2
-@ComponentScan(basePackages ={"com.gaeainfo.module.*.controller","com.gaeainfo.framework.ext.*.controller"})
+@ComponentScan(basePackages = {"com.gaeainfo.module.*.controller", "com.gaeainfo.ybss.*.controller", "com.gaeainfo.framework.ext.*.controller"})
 
 /**
  * Created by Rock on 2016/8/2.

@@ -1,7 +1,7 @@
 package com.gaeainfo.module.test.service;
 
 import com.gaeainfo.module.base.dao.BaseHibernateDao;
-import com.gaeainfo.module.test.bo.Ouser;
+import com.gaeainfo.module.test.entity.Ouser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

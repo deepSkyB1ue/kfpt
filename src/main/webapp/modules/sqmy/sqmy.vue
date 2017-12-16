@@ -2,128 +2,133 @@
     <div>
         <div style="height:100px"></div>
         <div class="g-mn sqmy">
-            <gaea-tabs type="card" value="name1">
-                <gaea-tab-pane label="申请注册" name="name1">
-                    <gaea-form :model="formInline" :rules="ruleInline" :label-width="150">
+            <gaea-tabs type="card" value="register" @on-click="tabpaneclick">
+                <gaea-tab-pane label="申请注册" name="register">
+                    <h4 style="margin-bottom: 10px;">提示: 申请密钥需要获取您的基本信息，请确认登录</h4>
+                    <gaea-form ref="formInline" :model="formInline" :rules="ruleInline" :label-width="150">
                         <gaea-form-item label="安卓MD5：" prop="androidmd5">
-                            <gaea-input v-model="formItem.input"></gaea-input>
+                            <gaea-input v-model="formInline.androidmd5" maxlength="50"></gaea-input>
                         </gaea-form-item>
                         <gaea-form-item label="包名：" prop="packageName">
-                            <gaea-input v-model="formItem.input"></gaea-input>
+                            <gaea-input v-model="formInline.packageName" maxlength="50"></gaea-input>
                         </gaea-form-item>
                         <gaea-form-item label="应用网址：" prop="url">
-                            <gaea-input v-model="formItem.input"></gaea-input>
+                            <gaea-input v-model="formInline.url" maxlength="50"></gaea-input>
                         </gaea-form-item>
                         <gaea-form-item label="应用名称：" prop="appName">
-                            <gaea-input v-model="formItem.input"></gaea-input>
+                            <gaea-input v-model="formInline.appName" maxlength="50"></gaea-input>
                         </gaea-form-item>
                         <gaea-form-item label="公司名称：" prop="company">
-                            <gaea-input v-model="formItem.input"></gaea-input>
+                            <gaea-input v-model="formInline.company" maxlength="50"></gaea-input>
                         </gaea-form-item>
                         <gaea-form-item label="联系人姓名：" prop="contactName">
-                            <gaea-input v-model="formItem.input"></gaea-input>
+                            <gaea-input v-model="formInline.contactName" maxlength="20"></gaea-input>
                         </gaea-form-item>
                         <gaea-form-item label="联系人电话：" prop="contactNumber">
-                            <gaea-input v-model="formItem.input"></gaea-input>
+                            <gaea-input v-model="formInline.contactNumber" maxlength="20"></gaea-input>
                         </gaea-form-item>
                         <gaea-form-item>
-                            <gaea-button type="primary">立即注册</gaea-button>
+                            <gaea-button type="primary" @click="handleSubmit('formInline')">注册</gaea-button>
+                            <gaea-button type="default" @click="reset">重置</gaea-button>
                         </gaea-form-item>
                     </gaea-form>
                 </gaea-tab-pane>
-                <gaea-tab-pane label="待审核" name="name2">
-                    <gaea-table :columns="columns" :data="data"></gaea-table>
-                    <gaea-page :total="100" show-total></gaea-page>
-
+                <gaea-tab-pane label="待审核" name="list">
+                    <gaea-table :columns="columns" :data="data" stripe no-data-text="暂无" highlight-row="true"
+                                border="true"></gaea-table>
+                    <gaea-page :total="totalsize" :current="pagenum" :page-size="pagesize" show-total
+                               @on-change="changePage"></gaea-page>
                 </gaea-tab-pane>
             </gaea-tabs>
-
         </div>
     </div>
 </template>
 
 <script>
+    var sqmyobj;
 module.exports = {
     data() {
         return {
             formInline: {
-                user: '',
-                password: ''
+                pid: '',
+                androidmd5: '',
+                packageName: '',
+                url: '',
+                appName: '',
+                company: '',
+                contactName: '',
+                contactNumber: ''
             },
             ruleInline: {
                 androidmd5: [
                     {
                         required: true,
-                        message: '请填写安卓MD5',
-                        trigger: 'blur'
+                        message: '请填写长度不超过50的安卓MD5码',
+                        trigger: 'blur',
+                        max: 50
                     }
                 ],
                 packageName: [
                     {
                         required: true,
-                        message: '请填写包名',
-                        trigger: 'blur'
+                        message: '请填写长度不超过50的包名',
+                        trigger: 'blur',
+                        max: 50
                     }
                 ],
                 url: [
                     {
                         required: true,
-                        message: '请填写应用网址',
-                        trigger: 'blur'
+                        message: '请填写长度不超过50的应用网址',
+                        trigger: 'blur',
+                        max: 50
                     }
                 ],
                 appName: [
                     {
                         required: true,
-                        message: '请填写应用名称',
-                        trigger: 'blur'
+                        message: '请填写长度不超过50的应用名称',
+                        trigger: 'blur',
+                        max: 50
                     }
                 ],
                 company: [
                     {
                         required: true,
-                        message: '请填写公司名称',
-                        trigger: 'blur'
+                        message: '请填写长度不超过50的公司名称',
+                        trigger: 'blur',
+                        max: 50
                     }
                 ],
                 contactName: [
                     {
                         required: true,
-                        message: '请填写联系人姓名',
-                        trigger: 'blur'
+                        message: '请填写长度不超过20的联系人姓名',
+                        trigger: 'blur',
+                        max: 20
                     }
                 ],
                 contactNumber: [
                     {
                         required: true,
-                        message: '请填写联系人电话',
-                        trigger: 'blur'
+                        message: '请填写长度不超过20的联系人电话',
+                        trigger: 'blur',
+                        max: 20
                     }
                 ]
-            },
-            formItem: {
-                input: '',
-                select: '',
-                radio: 'male',
-                checkbox: [],
-                switch: true,
-                date: '',
-                time: '',
-                slider: [20, 50],
-                textarea: ''
             },
             columns: [
                 {
                     title: '安卓MD5',
-                    key: 'androidMD5'
+                    key: 'androidmd5'
                 },
                 {
                     title: '包名',
-                    key: 'packageName'
+                    key: 'packagename'
                 },
                 {
-                    title: '服务器MD5',
-                    key: 'serverMD5'
+                    title: '密钥',
+                    key: 'servermd5'
                 },
                 {
                     title: '应用网址',
@@ -131,7 +136,7 @@ module.exports = {
                 },
                 {
                     title: '应用名称',
-                    key: 'appName'
+                    key: 'appname'
                 },
                 {
                     title: '公司名称',
@@ -139,11 +144,11 @@ module.exports = {
                 },
                 {
                     title: '联系人姓名',
-                    key: 'contactName'
+                    key: 'contactname'
                 },
                 {
                     title: '联系电话',
-                    key: 'contactNumber'
+                    key: 'contactnumber'
                 },
                 {
                     title: '操作',
@@ -151,20 +156,32 @@ module.exports = {
                     width: 150,
                     align: 'center',
                     render: function(h, params) {
-                        return h('div', [
+                        let renderArr = [
                             h(
                                 'gaea-button',
                                 {
                                     props: {
-                                        type: 'primary',
+                                        type: 'info',
                                         size: 'small'
                                     },
                                     style: {
                                         marginRight: '5px'
                                     },
                                     on: {
-                                        click: function() {
-                                            v.show(params.index);
+                                        click: () => {
+                                            $(
+                                                $('.sqmy .ivu-tabs-tab')[0]
+                                            ).click();
+                                            sqmyobj.formInline = {
+                                                pid: params.row.pid,
+                                                androidmd5: params.row.androidmd5,
+                                                packageName: params.row.packagename,
+                                                url: params.row.url,
+                                                appName: params.row.appname,
+                                                company: params.row.company,
+                                                contactName: params.row.contactname,
+                                                contactNumber: params.row.contactnumber
+                                            };
                                         }
                                     }
                                 },
@@ -177,47 +194,213 @@ module.exports = {
                                         type: 'error',
                                         size: 'small'
                                     },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
                                     on: {
-                                        click: function() {
-                                            v.remove(params.index);
+                                        click: () => {
+                                            commonUtils.modal(
+                                                vm,
+                                                '警告',
+                                                '即将为您删除当前选中行, 是否确认?',
+                                                function () {
+                                                    const rowindex =
+                                                        params.index;
+                                                    commonUtils.httpPost(
+                                                        './rest/applyForKey/delete',
+                                                        params.row.pid,
+                                                        function (data) {
+                                                            sqmyobj.data.splice(
+                                                                rowindex,
+                                                                1
+                                                            );
+                                                            sqmyobj.totalsize -= 1;
+                                                            vm.$Message.info(
+                                                                data
+                                                            );
+                                                        },
+                                                        function (data1) {
+                                                            vm.$Message.error(
+                                                                data1
+                                                            );
+                                                        }
+                                                    );
+                                                }
+                                            );
                                         }
                                     }
                                 },
                                 '删除'
                             )
-                        ]);
+                        ];
+                        let adminRenderArr = [
+                            h(
+                                'gaea-button',
+                                {
+                                    props: {
+                                        type: 'success',
+                                        size: 'small'
+                                    },
+                                    on: {
+                                        click: function () {
+                                            commonUtils.modal(
+                                                vm,
+                                                '提示',
+                                                '是否确认当前记录审核通过?',
+                                                function () {
+                                                    const rowindex =
+                                                        params.index;
+                                                    const postObj = {
+                                                        pid: params.row.pid,
+                                                        auditpersonid: commonUtils.getSessionObj(
+                                                            'userInfo'
+                                                        ).username
+                                                    };
+                                                    commonUtils.httpPost(
+                                                        './rest/applyForKey/audit',
+                                                        postObj,
+                                                        function (data) {
+                                                            sqmyobj.data.splice(
+                                                                rowindex,
+                                                                1
+                                                            );
+                                                            sqmyobj.totalsize -= 1;
+                                                            vm.$Message.info(
+                                                                data
+                                                            );
+                                                        },
+                                                        function (data1) {
+                                                            vm.$Message.error(
+                                                                data1
+                                                            );
+                                                        }
+                                                    );
+                                                }
+                                            );
+                                        }
+                                    }
+                                },
+                                '审核'
+                            )
+                        ];
+                        if (
+                            commonUtils.sessionExist('userInfo') &&
+                            'admin' ===
+                            commonUtils.getSessionObj('userInfo').identity
+                        ) {
+                            renderArr = [...renderArr, ...adminRenderArr];
+                        }
+                        return h('div', renderArr);
                     }
                 }
             ],
-            data: [
-                {
-                    name: '王小明',
-                    age: 18,
-                    address: '北京市朝阳区芍药居'
-                },
-                {
-                    name: '张小刚',
-                    age: 25,
-                    address: '北京市海淀区西二旗'
-                },
-                {
-                    name: '李小红',
-                    age: 30,
-                    address: '上海市浦东新区世纪大道'
-                },
-                {
-                    name: '周小伟',
-                    age: 26,
-                    address: '深圳市南山区深南大道'
-                }
-            ]
+            data: [],
+            totalsize: 0,
+            pagenum: 1,
+            pagesize: 6
         };
     },
-    methods: {},
+    methods: {
+        handleSubmit(name) {
+            this.$refs[name].validate(valid => {
+                if (valid) {
+                    if (!commonUtils.sessionExist('userInfo')) {
+                        this.$Message.info(
+                            '申请密钥需要获取您的基本信息，请先登录!'
+                        );
+                        let d_sqmy1 = setTimeout(() => {
+                            window.location.href = './login.html';
+                        }, 2000);
+                        return;
+                    }
+                    let sqmyInsert = {
+                        androidmd5: this.formInline.androidmd5,
+                        appname: this.formInline.appName,
+                        auditpersonid: '',
+                        audittime: '',
+                        company: this.formInline.company,
+                        contactname: this.formInline.contactName,
+                        contactnumber: this.formInline.contactNumber,
+                        createrid: commonUtils.getSessionObj('userInfo')
+                            .username,
+                        packagename: this.formInline.packageName,
+                        pid: this.formInline.pid,
+                        servermd5: '',
+                        status: '0',
+                        url: this.formInline.url
+                    };
+                    let that = this;
+                    commonUtils.httpPost(
+                        './rest/applyForKey/insert',
+                        sqmyInsert,
+                        function (data) {
+                            commonUtils.modal(
+                                vm,
+                                '提示',
+                                '注册成功, 您的密钥是: ' + data,
+                                function () {
+                                    that.reset();
+                                },
+                                function () {
+                                    that.reset();
+                                }
+                            );
+                        },
+                        function (data1) {
+                            that.$Message.error(data1);
+                        }
+                    );
+                } else {
+                    this.$Message.error('请完善注册信息!');
+                }
+            });
+        },
+        reset() {
+            commonUtils.clearObjValues(this.formInline);
+        },
+        tabpaneclick(name) {
+            if ('register' === name) {
+                this.reset();
+            }
+            if ('list' === name) {
+                if (!commonUtils.sessionExist('userInfo')) {
+                    this.$Message.info('无法获取您的基本信息，请先登录!');
+                    let d_sqmy2 = setTimeout(() => {
+                        window.location.href = './login.html';
+                    }, 2000);
+                    return;
+                } else {
+                    this.changePage(1);
+                }
+            }
+        },
+        changePage(pagenum) {
+            const username = commonUtils.getSessionObj('userInfo').username;
+            const identity = commonUtils.getSessionObj('userInfo').identity;
+            let sqmyUrl = './rest/applyForKey/' + username + '/page_' + pagenum;
+            let that = this;
+            commonUtils.httpGet(
+                sqmyUrl,
+                function (data) {
+                    that.data = data.pageData;
+                    that.pagenum = data.pageNum;
+                    that.totalsize = data.totalSize;
+                },
+                function () {
+                    that.data = [];
+                }
+            );
+        }
+    },
     watch: {},
     mounted: function() {
         console.log('sqmy');
+        sqmyobj = this;
         commonUtils.setGbdHeight();
+        this.$Message.config({
+            top: 100,
+            duration: 3
+        });
     },
     beforeDestroy: function() {}
 };
@@ -225,10 +408,9 @@ module.exports = {
 
 <style>
 .sqmy {
-    /* position: relative;
-    top: 100px;
-    left: 0;
-    right: 0; */
+}
+.sqmy .ivu-tabs-bar{
+    margin-bottom:5px;
 }
 .sqmy .pane1 {
     width: 500px;
@@ -251,5 +433,16 @@ module.exports = {
     max-height: 400px;
     overflow-y: auto;
     margin-bottom: 15px;
+}
+.sqmy .ivu-table-cell{
+    padding-left:5px;
+    padding-right:5px;
+    text-align:center;
+}
+.sqmy th .ivu-table-cell{
+    display:block;
+}
+.sqmy .ivu-table-body{
+    user-select:text;
 }
 </style>

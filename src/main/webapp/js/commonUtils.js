@@ -9,22 +9,24 @@ let commonUtils = {
      * @param successCallBackH
      * @param errCallBack
      */
-    httpGet: function(url, successCallBack, errorCallBack) {
-        commonUtils.showContainerMask(true);
+    httpGet: function (url, successCallBack, failureCallBack) {
         axios
             .get(url)
             .then(function(response) {
-                commonUtils.showContainerMask(false);
                 if (response.data.success) {
                     successCallBack(response.data.data);
+                } else {
+                    if (failureCallBack) {
+                        if (
+                            '' !== commonUtils.validateValue(response.data.msg)
+                        ) {
+                            failureCallBack(response.data.msg);
+                        }
+                    }
                 }
             })
             .catch(function(error) {
                 console.log(error);
-                commonUtils.showContainerMask(false);
-                if (errorCallBack) {
-                    errorCallBack();
-                }
             });
     },
     /**
@@ -34,29 +36,27 @@ let commonUtils = {
      * @param successCallBack
      * @param errorCallBack
      */
-    httpPost: function(url, data, successCallBack, errorCallBack) {
-        if (url.indexOf('ConditionCounts') == -1) {
-            commonUtils.showContainerMask(true);
-        }
+    httpPost: function (url, data, successCallBack, failureCallBack) {
         var params = {};
         params.time = new Date().getTime();
         params.data = data;
         axios
             .post(url, params)
             .then(function(response) {
-                if (url.indexOf('ConditionCounts') == -1) {
-                    commonUtils.showContainerMask(false);
-                }
                 if (response.data.success) {
                     successCallBack(response.data.data);
+                } else {
+                    if (failureCallBack) {
+                        if (
+                            '' !== commonUtils.validateValue(response.data.msg)
+                        ) {
+                            failureCallBack(response.data.msg);
+                        }
+                    }
                 }
             })
             .catch(function(error) {
-                commonUtils.showContainerMask(false);
                 console.log(error);
-                if (errorCallBack) {
-                    errorCallBack();
-                }
             });
     },
     /**
@@ -76,7 +76,7 @@ let commonUtils = {
         const containerHeight =
             $(window).height() - $('.g-hd').height() - $('.g-ft').height();
         const contentHeight = $('.g-bd>div').height();
-        const minHeight=768-$('.g-hd').height() - $('.g-ft').height();
+        const minHeight = 768 - $('.g-hd').height() - $('.g-ft').height();
         if ($(window).height() < 768) {
             $('.g-bd').height(minHeight + 'px');
         }
@@ -85,6 +85,67 @@ let commonUtils = {
         } else {
             $('.g-bd').height(contentHeight + 'px');
         }
+    },
+    /**
+     *读取html文件
+     */
+    loadHtml(url, callback) {
+        GL.Http({
+            url: url,
+            method: 'get',
+            params: null,
+            responseType: 'text'
+        })
+            .then(function (response) {
+                callback(response.data);
+            })
+            .catch(function (error) {
+                console.log('error' + error);
+            });
+    },
+    /**
+     * 检测session是否存在
+     */
+    sessionExist(name) {
+        if ('' !== this.validateValue(sessionStorage.getItem(name))) {
+            return true;
+        }
+        return false;
+    },
+    /**
+     * 获取session对象
+     */
+    getSessionObj(name) {
+        if (this.sessionExist(name)) {
+            return JSON.parse(sessionStorage.getItem(name));
+        }
+        return {};
+    },
+    /**
+     * 清空对象内部所有value
+     */
+    clearObjValues(obj) {
+        if (obj) {
+            for (var key in obj) {
+                if (typeof obj[key] !== 'function') {
+                    obj[key] = '';
+                }
+            }
+        }
+    },
+    modal(vueObj = vm, title = '提示', content = '无法获取对话框信息', onokfunc = function () {
+    }, oncancelfunc = function () {
+    }) {
+        const modalConfig = {
+            title: title,
+            content: content,
+            okText: '确定',
+            cancelText: '取消',
+            loading: false,
+            onOk: onokfunc,
+            onCancel: oncancelfunc
+        };
+        vueObj.$Modal.confirm(modalConfig);
     },
     /**
      *获取当前日期
@@ -98,30 +159,6 @@ let commonUtils = {
             return year + _gap + month + _gap + day;
         }
         return year + '年' + month + '月' + day + '日';
-    },
-    /**
-     *设置SessionAttr
-     */
-    setSessionAttr: function(_key, _value) {
-        sessionStorage.setItem(_key, _value);
-    },
-    /**
-     *获取SessionAttr
-     */
-    getSessionAttr: function(_key) {
-        sessionStorage.getItem(_key);
-    },
-    /**
-     *移除SessionAttr
-     */
-    removeSessionAttr: function(_key) {
-        sessionStorage.removeItem(_key);
-    },
-    /**
-     *清空SessionAtrr
-     */
-    clearSessionAttr: function() {
-        sessionStorage.clear();
     }
 };
 /**

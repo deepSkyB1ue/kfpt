@@ -1,0 +1,86 @@
+<div>
+    <div>
+        <gaea-Steps direction="vertical">
+            <gaea-Step status="wait" content="sample1"></gaea-Step>
+            <gaea-Step status="wait" content="sample2"></gaea-Step>
+        </gaea-Steps>
+    </div>
+    <div id="sample1">
+        <div class="textTitle">
+            <p>添加地图对象</p>
+        </div>
+        <div class="textBody">
+            <p>将此代码添加到需要嵌入地图的页面中，修改地图应用服务地址，即可访问地图服务。格式如下：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>&lt;div id="szMapContainer" style='width: 100%; height: 100%;'&gt;</p>
+            <p>&lt;object id="_szmap" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%"&gt;</p>
+            <p>&lt;param name="movie" value="地图调用地址" /&gt;</p>
+            <p>&lt;param name="base" value="地图项目地址" /&gt;</p>
+            <p>&lt;param name="bgcolor" value="#FFFFFF" /&gt;</p>
+            <p>&lt;param name="allowScriptAccess" value="always" /&gt;</p>
+            <p>&lt;param name="allowFullScreen" value="true" /&gt;</p>
+            <p>&lt;param name="wmode" value="window"/&gt;</p>
+            <p>&lt;param name="flashvars" value="config=config.xml" /&gt;</p>
+            <p>&lt;object id="_szmap2" type="application/x-shockwave-flash" data="地图调用地址" width="100%"
+                height="100%"&gt;</p>
+            <p>&lt;param name="bgcolor" value="#FFFFFF" /&gt;</p>
+            <p>&lt;param name="base" value="地图项目地址" /&gt;</p>
+            <p>&lt;param name="allowScriptAccess" value="always" /&gt;</p>
+            <p>&lt;param name="allowFullScreen" value="true" /&gt;</p>
+            <p>&lt;param name="flashvars" value="config=config.xml" /&gt;</p>
+            <p>&lt;/object&gt;</p>
+            <p>&lt;/object&gt;</p>
+            <p>&lt;/div&gt;</p>
+        </div>
+        <div class="textBody_explain">
+            <p>地图调用地址例如：http://服务器IP/xzpgis/index.swf</p>
+            <p>地图项目地址例如：http:// 服务器IP /xzpgis/
+        </div>
+        </p>
+    </div>
+    <div>
+        <div class="textTitle">
+            <p>引入JS文件</p>
+        </div>
+        <div class="textBody">
+            <p>将interface.js接口文件拷贝至所需项目中，并在需要调用接口的页面中引入此JS文件，即可使用此接口中的方法调用地图服务。</p>
+            <p>&lt;script src="JS文件路径" type="text/javascript"&gt;&lt;/script&gt;</p>
+        </div>
+    </div>
+    <div>
+        <div class="textTitle">
+            <p>调用接口示例</p>
+        </div>
+        <div style="display: flex;align-items: flex-start;">
+            <div class="textBody">
+                <p>方法名:</p>
+            </div>
+            <div class="textBody_explain">
+                <p>SetData</p>
+            </div>
+        </div>
+        <div style="display: flex;align-items: flex-start;">
+            <div class="textBody">
+                <p>参数:</p>
+            </div>
+            <div class="textBody_explain">
+                <p>userId：用户ID</p>
+                <p>taskGuid：组件标识</p>
+                <p>dataGuid：图层标识</p>
+                <p>type：数据类型代码（如：AddLayer）</p>
+                <p>xmlData：数据</p>
+                </p>
+            </div>
+        </div>
+        <div class="textBody_explain">
+            <p>（如：</p>
+            <p>&lt;Document TaskGuid="组件标识" DataGuid="图层标识" DataType="AddLayer"></p>
+            <p>&lt;LName Type = "Text">图层名&lt;/LName&gt;</p>
+            <p>&lt;LType Type = "Text"&gt;图层类型（Point、Line、Polygon）&lt;/LName&gt;</p>
+            <p>…（数据可重复多次出现）</p>
+            <p>&lt;/Document></p>
+            <p>）</p>
+        </div>
+    </div>
+</div>

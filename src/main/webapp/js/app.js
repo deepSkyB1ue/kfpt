@@ -1,8 +1,8 @@
 let vm = new Vue({
     router: router,
     data: {
-        systemName: '徐州PGIS开放平台',
-        userName: '欢迎，请登录啊',
+        systemName: '徐州公安地理大数据平台',
+        userName: '请登录',
         popupArray: [],
         paramData: '',
         needLogin: true,
@@ -21,6 +21,16 @@ let vm = new Vue({
         navSelect: function(name) {
             // this.paramData = { aaa: 'aaa', bbb: 'bbb' };
             if ('' !== commonUtils.validateValue(name)) {
+                // 申请密钥必须登录
+                if ('/sqmy' === name && !commonUtils.sessionExist('userInfo')) {
+                    this.$Message.info(
+                        '申请密钥需要获取您的基本信息，请先登录!'
+                    );
+                    let d_sqmy = setTimeout(() => {
+                        window.location.href = './login.html';
+                    }, 2000);
+                    return;
+                }
                 router.push(name);
             }
         },
@@ -46,12 +56,19 @@ let vm = new Vue({
             this.navItemsShow = false;
         },
         login() {
-            alert('登录跳转');
+            sessionStorage.removeItem('userInfo');
+            commonUtils.authInfo = {};
+            window.location.href = './login.html';
             this.needLogin = false;
         },
         logout() {
-            // alert('确定要退出登录?');
-            this.needLogin = true;
+            sessionStorage.removeItem('userInfo');
+            commonUtils.authInfo = {};
+            window.location.href = './login.html';
+            let d_home = setTimeout(() => {
+                this.userName = '请登录';
+                this.needLogin = true;
+            }, 1000);
         }
     },
     computed: {
@@ -62,5 +79,14 @@ let vm = new Vue({
             return this.search.loading ? { 'background-color': '#fff' } : {};
         }
     },
-    mounted: function() {}
+    mounted: function () {
+        this.$Message.config({
+            top: 100,
+            duration: 3
+        });
+        if (commonUtils.sessionExist('userInfo')) {
+            this.userName = commonUtils.getSessionObj('userInfo').realname;
+            this.needLogin = false;
+        }
+    }
 }).$mount('#app');

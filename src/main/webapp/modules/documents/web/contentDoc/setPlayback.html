@@ -1,0 +1,748 @@
+<div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据名称：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>历史轨迹数据，用于在GIS系统中显示车辆的历史轨迹，包括：点位标识、图标编号、历史定位数据等。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>接口函数：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>SetData</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据类型代码：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>&lt;Document TaskGuid="组件标识" DataGuid="数据标识" DataType="HisLocation"&gt;</p>
+            <p>&lt;LName Type = "TEXT"&gt;用来显示轨迹线的图层名称&lt;/LName&gt;</p>
+            <p>&lt;PData></p>
+            <p>&lt;CallBack Type = "TEXT"&gt;是否需要回调（1：是；0：否）&lt;/CallBack&gt;</p>
+            <p>&lt;PageStart Type="TEXT"&gt;是否是起始页（1：是；0：否）&lt;/PageStart&gt;</p>
+            <p>&lt;PageEnd Type="TEXT"&gt;是否已到末页（1：是；0：否）&lt;/PageEnd&gt;</p>
+            <p>&lt;StartIcon Type = "TEXT"&gt;起点图标ID或相对路径&lt;/ StartIcon&gt;</p>
+            <p>&lt;Icon Type = "TEXT"&gt;图标ID或相对路径&lt;/Icon&gt;</p>
+            <p>&lt;/PData&gt;</p>
+            <p>&lt;PLocation&gt;</p>
+            <p>&lt;Guid Type = "GUID"&gt;点位ID&lt;/Guid&gt;</p>
+            <p>&lt;Label Type = "TEXT"&gt;点位显示名称&lt;/Label&gt;</p>
+            <p>&lt;LON Type = "SINGLE"&gt;经度&lt;/LON&gt;</p>
+            <p>&lt;LAT Type = "SINGLE"&gt;纬度&lt;/LAT&gt;</p>
+            <p>&lt;Time Type = "DATE"&gt;时间&lt;/Time&gt;</p>
+            <p>&lt;Speed Type = " SINGLE"&gt;速度&lt;/Speed&gt;</p>
+            <p>&lt;Direction Type = "LONG"&gt;方向&lt;/Direction&gt;</p>
+            <p>&lt;Status Type=”TEXT”&gt;状态&lt;/Status&gt;</p>
+            <p>&lt;Icon Type = "TEXT"&gt;图标ID或相对路径&lt;/Icon&gt;</p>
+            <p>&lt;Angle Type = "TEXT"&gt;角度（0度为正北方向，可选，默认为0）&lt;/Angle&gt;</p>
+            <p>&lt;/PLocation&gt;</p>
+            <p>…（数据可重复多次出现）</p>
+            <p>&lt;LSymbol&gt;</p>
+            <p>&lt;LColor Type = "TEXT"&gt;轨迹线颜色（#RGB，例：#00FF00）&lt;/LColor&gt;</p>
+            <p>&lt;LStyle Type = "TEXT"&gt;轨迹线线型，dash：虚线；solid：实线 &lt;/LStyle&gt;</p>
+            <p>&lt;LWight Type = " SINGLE "&gt;线宽&lt;/LWight&gt;</p>
+            <p>&lt;Transpatecy Type = " SINGLE "&gt;透明度（例：0.8）&lt;/Transpatecy&gt;</p>
+            <p>&lt;/LSymbol&gt;</p>
+            <p>&lt;/Document&gt;</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据描述：</p>
+        </div>
+        <div class="textBody_explain" style="width: 86%;padding-top: 16px;">
+            <table valign="center" align="center" border="1" width="100%">
+                <thead>
+                <tr>
+                    <td>节点名称</td>
+                    <td>类型</td>
+                    <td>是否必填</td>
+                    <td>含义</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>LName</td>
+                    <td>Text</td>
+                    <td>是</td>
+                    <td>用来显示轨迹回放的图层名称。</td>
+                </tr>
+                <tr>
+                    <td>PageStart</td>
+                    <td>Text</td>
+                    <td>是</td>
+                    <td>
+                        <div>是否是第一页。</div>
+                        <div>0：否；</div>
+                        <div>1：是；</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>PageEnd</td>
+                    <td>Text</td>
+                    <td>是</td>
+                    <td>
+                        <div>是否是最后一页。</div>
+                        <div>0：否；</div>
+                        <div>1：是；</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Guid</td>
+                    <td>GUID</td>
+                    <td>是</td>
+                    <td>点位信息的唯一标识（Guid）</td>
+                </tr>
+                <tr>
+                    <td>Label</td>
+                    <td>TEXT</td>
+                    <td>否</td>
+                    <td>点位显示的名称</td>
+                </tr>
+                <tr>
+                    <td>LON</td>
+                    <td>SINGLE</td>
+                    <td>是</td>
+                    <td>经度举例：“120.123456”</td>
+                </tr>
+                <tr>
+                    <td>LAT</td>
+                    <td>SINGLE</td>
+                    <td>是</td>
+                    <td>纬度举例：“31.123456”</td>
+                </tr>
+                <tr>
+                    <td>Time</td>
+                    <td>DATE</td>
+                    <td>否</td>
+                    <td>定位时间</td>
+                </tr>
+                <tr>
+                    <td>Speed</td>
+                    <td>SINGLE</td>
+                    <td>否</td>
+                    <td>当前速度(Km/h)</td>
+                </tr>
+                <tr>
+                    <td>Direction</td>
+                    <td>LONG</td>
+                    <td>否</td>
+                    <td>方向</td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>TEXT</td>
+                    <td>否</td>
+                    <td>状态</td>
+                </tr>
+                <tr>
+                    <td>Icon</td>
+                    <td>TEXT</td>
+                    <td>是</td>
+                    <td>图标编号或相对路径（BS相对路径为图标的URL，CS相对路径为，相对于GIS组件所在目录中指定图片文件夹GIMapImage的路径）</td>
+                </tr>
+                <tr>
+                    <td>Angle</td>
+                    <td>SINGLE</td>
+                    <td>否</td>
+                    <td>图标角度，0度为正北，默认为0</td>
+                </tr>
+                <tr>
+                    <td>LColor</td>
+                    <td>TEXT</td>
+                    <td>否</td>
+                    <td>轨迹线颜色RGB，如#00FF00</td>
+                </tr>
+                <tr>
+                    <td>LStyle</td>
+                    <td>TEXT</td>
+                    <td>否</td>
+                    <td>线形，dash虚线，solid实线</td>
+                </tr>
+                <tr>
+                    <td>LWeight</td>
+                    <td>SINGLE</td>
+                    <td>否</td>
+                    <td>线宽</td>
+                </tr>
+                <tr>
+                    <td>Transpatecy</td>
+                    <td>SINGLE</td>
+                    <td>否</td>
+                    <td>透明度</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据完整性说明：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>点位标识是主要标识；</p>
+            <p>图层名称是指定轨迹回放显示的图层，不能为空；</p>
+            <p>是否为第一页和是否为最后一页不能为空；</p>
+            <p>经度、纬度不能为空；</p>
+            <p>车辆数据被删除后，车辆定位数据也将同步删除。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>流转方式：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>轨迹回放数据，由业务系统产生，不在其他系统中流转。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据生成的频度：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>根据应用需求产生。</p>
+        </div>
+    </div>
+    <!--6.2.轨迹回放回调函数-->
+    <div class="textTitle">
+        <p>轨迹回放回调函数</p>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据名称：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>轨迹回放时GIS回调客户端。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>接口函数：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>SetData_CallBack</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据类型代码：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>轨迹回放时GIS系统每显示一个点就触发该函数。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据格式：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>&lt;Document TaskGuid = "组件标识" DataGuid = "数据标识" DataType = "HisLocationPoint">&gt;</p>
+            <p>&lt;Guid Type = "GUID"&gt;点位ID&lt;/Guid&gt;</p>
+            <p>&lt;Label Type = "TEXT"&gt;点位显示名称&lt;/Label&gt;</p>
+            <p>&lt;LON Type = "SINGLE"&gt;经度&lt;/LON&gt;</p>
+            <p>&lt;LAT Type = "SINGLE"&gt;纬度&lt;/LAT&gt;</p>
+            <p>&lt;Time Type = "DATE"&gt;时间&lt;/Time&gt;</p>
+            <p>&lt;Speed Type = " SINGLE"&gt;速度&lt;/Speed&gt;</p>
+            <p>&lt;Direction Type = "LONG"&gt;方向&lt;/Direction&gt;</p>
+            <p>&lt;Status Type=”TEXT”&gt;状态&lt;/Status&gt;</p>
+            <p>&lt;/Document&gt;</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据描述：</p>
+        </div>
+        <div class="textBody_explain" style="width: 86%;padding-top: 16px;">
+            <table valign="center" align="center" border="1" width="100%">
+                <thead>
+                <tr>
+                    <td>节点名称</td>
+                    <td>类型</td>
+                    <td>是否必填</td>
+                    <td>含义</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Guid</td>
+                    <td>GUID</td>
+                    <td>是</td>
+                    <td>点位信息的唯一标识（Guid）</td>
+                </tr>
+                <tr>
+                    <td>Label</td>
+                    <td>TEXT</td>
+                    <td>否</td>
+                    <td>点位显示的名称</td>
+                </tr>
+                <tr>
+                    <td>LON</td>
+                    <td>SINGLE</td>
+                    <td>是</td>
+                    <td>经度举例：“120.123456”</td>
+                </tr>
+                <tr>
+                    <td>LAT</td>
+                    <td>SINGLE</td>
+                    <td>是</td>
+                    <td>纬度举例：“31.123456”</td>
+                </tr>
+                <tr>
+                    <td>Time</td>
+                    <td>DATE</td>
+                    <td>否</td>
+                    <td>定位时间</td>
+                </tr>
+                <tr>
+                    <td>Speed</td>
+                    <td>SINGLE</td>
+                    <td>否</td>
+                    <td>当前速度(Km/h)</td>
+                </tr>
+                <tr>
+                    <td>Direction</td>
+                    <td>LONG</td>
+                    <td>否</td>
+                    <td>方向</td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>TEXT</td>
+                    <td>否</td>
+                    <td>状态</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>流转方式：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>消息由GIS系统产生，反馈给业务系统。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据生成的频度：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>轨迹回放时根据应用需求产生。</p>
+        </div>
+    </div>
+    <!--6.3.设置轨迹回放显示方式-->
+    <div class="textTitle">
+        <p>设置轨迹回放显示方式</p>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据名称：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>轨迹回放的显示方式。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>接口函数：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>SetData</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据类型代码：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>HisLocationDisplay。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据定义：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>轨迹回放时设置显示轨迹点或轨迹线。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据格式：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>&lt;Document TaskGuid = "组件标识" DataGuid = "数据标识" DataType = "HisLocationDisplay"&gt;</p>
+            <p>&lt;IsPoint Type = "Text"&gt;是否只显示轨迹点（1：是；0：否）&lt;/IsPoint&gt;</p>
+            <p>&lt;/Document&gt;</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据描述：</p>
+        </div>
+        <div class="textBody_explain" style="width: 86%;padding-top: 16px;">
+            <table valign="center" align="center" border="1" width="100%">
+                <thead>
+                <tr>
+                    <td>节点名称</td>
+                    <td>类型</td>
+                    <td>是否必填</td>
+                    <td>含义</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>IsPoint</td>
+                    <td>Text</td>
+                    <td>是</td>
+                    <td>是否只显示轨迹点（1：是；0：否）</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>流转方式：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>消息由GIS系统产生，反馈给业务系统。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>访问权限：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>授权系统前台页面可获取该信息；</p>
+            <p>其他未授权系统无法进行获取；</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据生成的频度：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>轨迹回放时根据应用需求产生。</p>
+        </div>
+    </div>
+
+    <!--6.4.设置取消或暂停轨迹回放-->
+    <div class="textTitle">
+        <p>设置取消或暂停轨迹回放</p>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据名称：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>取消或暂停GIS地图中的轨迹回放。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>接口函数：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>SetData</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据类型代码：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>CancelHisLocation</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据定义：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>取消或暂停轨迹回放。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据格式：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>&lt;Document TaskGuid = "组件标识" DataGuid = "数据标识" DataType = "CancelHisLocation"&gt;</p>
+            <p>&lt;Cancel = " TEXT "&gt;0/1/2&lt;/Cancel&gt;</p>
+            <p>&lt;AutoTrack = " TEXT "&gt;0/1&lt;/AutoTrack&gt;</p>
+            <p>&lt;/Document&gt;</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据描述：</p>
+        </div>
+        <div class="textBody_explain" style="width: 86%;padding-top: 16px;">
+            <table valign="center" align="center" border="1" width="100%">
+                <thead>
+                <tr>
+                    <td>节点名称</td>
+                    <td>类型</td>
+                    <td>是否必填</td>
+                    <td>含义</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Cancel</td>
+                    <td>TEXT</td>
+                    <td>是</td>
+                    <td>
+                        <div>是否结束轨迹回放。</div>
+                        <div>0：暂停；</div>
+                        <div>1：停止；</div>
+                        <div>2：继续回放；</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>AutoTrack</td>
+                    <td>TEXT</td>
+                    <td>是</td>
+                    <td>
+                        <div>是否跟踪轨迹回放。</div>
+                        <div>0：跟踪；</div>
+                        <div>1：不跟踪；</div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>流转方式：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>消息由业务系统产生，反馈给GIS系统。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>访问权限：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>授权系统前台页面可获取该信息；</p>
+            <p>其他未授权系统无法进行获取；</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据生成的频度：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>根据应用需求产生。</p>
+        </div>
+    </div>
+    <!--设置显示或隐藏轨迹回放控制条-->
+    <div class="textTitle">
+        <p>设置显示或隐藏轨迹回放控制条</p>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据名称：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>取消或暂停GIS地图中的轨迹回放。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>接口函数：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>SetData</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据类型代码：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>CancelHisLocation</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据定义：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>取消或暂停轨迹回放。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据格式：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>&lt;Document TaskGuid = "组件标识" DataGuid = "数据标识" DataType = "DisplayControlBar"&gt;</p>
+            <p>&lt;Display = " TEXT "&gt;0/1&lt;/Display&gt;</p>
+            <p>&lt;/Document&gt;</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据描述:</p>
+        </div>
+        <div class="textBody_explain" style="width: 86%;padding-top: 16px;">
+            <table valign="center" align="center" border="1" width="100%">
+                <thead>
+                <tr>
+                    <td>节点名称</td>
+                    <td>类型</td>
+                    <td>是否必填</td>
+                    <td>含义</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Display</td>
+                    <td>TEXT</td>
+                    <td>是</td>
+                    <td>
+                        <div>是否显示轨迹回放控制条。</div>
+                        <div>0：显示；</div>
+                        <div>1：隐藏；</div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>流转方式：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>消息由业务系统产生，反馈给GIS系统。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>访问权限：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>授权系统前台页面可获取该信息；</p>
+            <p>其他未授权系统无法进行获取；</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据生成的频度：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>根据应用需求产生。</p>
+        </div>
+    </div>
+    <div class="textTitle">
+        <p>返回取消或暂停轨迹回放</p>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据名称：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>GIS系统返回业务系统当前轨迹的回放状态。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>接口函数：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>SetData_Callback</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据类型代码：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>CancelHisLocation</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据定义：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>取消或暂停轨迹回放。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据格式：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>&lt;Document TaskGuid = "组件标识" DataGuid = "数据标识" DataType = "CancelHisLocation"&gt;</p>
+            <p>&lt;Cancel = " TEXT "&gt;0/1/2&lt;/Cancel&gt;</p>
+            <p>&lt;/Document&gt;</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据描述：</p>
+        </div>
+        <div class="textBody_explain" style="width: 86%;padding-top: 16px;">
+            <table valign="center" align="center" border="1" width="100%">
+                <thead>
+                <tr>
+                    <td>节点名称</td>
+                    <td>类型</td>
+                    <td>是否必填</td>
+                    <td>含义</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Cancel</td>
+                    <td>TEXT</td>
+                    <td>是</td>
+                    <td>
+                        <div>是否结束轨迹回放。</div>
+                        <div>0：暂停；</div>
+                        <div>1：停止；</div>
+                        <div>2：继续回放；</div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>流转方式：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>消息由GIS系统产生，反馈给业务系统，不在其他系统中流转。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>访问权限：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>授权系统前台页面可获取该信息；</p>
+            <p>其他未授权系统无法进行获取；</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据生产的频度：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>根据应用需求产生。</p>
+        </div>
+    </div>
+</div>

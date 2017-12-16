@@ -1,0 +1,40 @@
+<div>
+    <div class="textBody">
+        <p>
+            回调函数为了与接口函数相区分，命名规则统一为接口函数名后加“_CallBack”进行命名，如“SetData”的回调函数为“SetData_CallBack”，函数参数分为JavaScript和.Net两种方式：</p>
+    </div>
+    <div class="textBody_explain">
+        <p>JavaScript的与接口函数相同，如SetData_CallBack ( UserID As string ,  TaskGuid As string ,  DataGuid As string , 
+            DataType As string ,  XmlData As string ) As int。</p>
+    </div>
+    <div class="textBody">
+        <p>.Net方式，采用事件机制，如SetData_Callback(this, new SetDataEventArgs(UserID, TaskGuid, DataGuid, DataType,
+            XmlData))，其中SetDataEventArgs派生于EventArgs类：</p>
+    </div>
+    <div class="textBody_explain">
+        <p>public class SetDataEventArgs : EventArgs</p>
+        <p>{</p>
+        <p>public SetDataEventArgs(string UserID, string TaskGuid, string DataGuid, string DataType, string XmlData)</p>
+        <p>{</p>
+        <p>this.UserID = UserID;</p>
+        <p>this.TaskGuid = TaskGuid;</p>
+        <p>this.DataGuid = DataGuid;</p>
+        <p>this.DataType = DataType;</p>
+        <p>this.XmlData = XmlData;</p>
+        <p>}</p>
+        <p>public string UserID;</p>
+        <p>public string TaskGuid;</p>
+        <p>public string DataGuid;</p>
+        <p>public string DataType;</p>
+        <p>public string XmlData;</p>
+        <p>}</p>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>GIS的TaskGuid统一为：</p>
+        </div>
+        <div class="textBody_explain">
+            <p style="color: #ff0000">FF17D1B3-85C7-40F4-8CDC-73DC57CD29BC</p>
+        </div>
+    </div>
+</div>

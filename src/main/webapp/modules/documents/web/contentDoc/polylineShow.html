@@ -1,0 +1,145 @@
+<div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据名称：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>矩形元素数据信息，维护矩形元素数据的基本信息，包括：颜色、透明度设定。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据类型代码：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>DrawPolyline</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据定义：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>图层名称、自动缩放、自动居中、线段GUID、点集、样式。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据格式：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>&lt;Document TaskGuid="组件标识" DataGuid="数据标识" DataType="DrawPolyline"&gt;</p>
+            <p>&lt;LName Type = "TEXT"&gt;用来显示线段的图层名称&lt;/LName&gt;</p>
+            <p>&lt;AutoZoom Type =”TEXT”&gt;是否自动缩放1：是，0：否（可选，默认为1）&lt;/AutoZoom&gt;</p>
+            <p>&lt;AutoPan Type =”TEXT&gt;是否自动居中1：是，0：否（可选，默认为1）&lt;/AutoPan&gt;</p>
+            <p>&lt;Transpatecy Type = " SINGLE "&gt;透明度（例：0.8，可选，默认为100）&lt;/Transpatecy&gt;</p>
+            <p>&lt;LData&gt;</p>
+            <p>&lt;Guid Type=”GUID”&gt;线段ID&lt;/Guid&gt;</p>
+            <p>&lt;POINTS Type = "TEXT"&gt;点集（例：120.123456,31.123456;120.654321,31.654321）&lt;/POINTS&gt;</p>
+            <p>&lt;LColor Type = "TEXT"&gt;线段颜色（#RGB，例：#00FF00，可选，默认为#FF0000）&lt;/LColor&gt;</p>
+            <p>&lt;LStyle Type = "TEXT"&gt;线型，dash：虚线；solid：实线（可选，默认为solid）&lt;/LStyle&gt;</p>
+            <p>&lt;LWight Type = " SINGLE "&gt;线宽（可选，默认为1）&lt;/LWight&gt;</p>
+            <p>&lt;/LData&gt;</p>
+            <p>…（数据可重复多次出现）</p>
+            <p>&lt;/Document&gt;</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据描述：</p>
+        </div>
+        <div class="textBody_explain" style="width: 86%;padding-top: 16px;">
+            <table valign="center" align="center" border="1" width="100%">
+                <thead>
+                <tr>
+                    <td>节点名称</td>
+                    <td>类型</td>
+                    <td>是否必填</td>
+                    <td>含义</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>LName</td>
+                    <td>Text</td>
+                    <td>是</td>
+                    <td>用来显示线段的图层名称。</td>
+                </tr>
+                <tr>
+                    <td>AutoZoom</td>
+                    <td>TEXT</td>
+                    <td>否</td>
+                    <td>
+                        <div>设置是否自动缩放地图比例。</div>
+                        <div>0：否；</div>
+                        <div>1：是；</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>AutoPan</td>
+                    <td>TEXT</td>
+                    <td>否</td>
+                    <td>
+                        <div>是否自动居中。</div>
+                        <div>0：否；</div>
+                        <div>1：是；</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Guid</td>
+                    <td>GUID</td>
+                    <td>是</td>
+                    <td>线段信息的唯一标识（Guid）</td>
+                </tr>
+                <tr>
+                    <td>POINTS</td>
+                    <td>TEXT</td>
+                    <td>是</td>
+                    <td>线段点位集合，以逗号（,）区分经度、纬度；以分号（;）分隔点位。</td>
+                </tr>
+                <tr>
+                    <td>LColor</td>
+                    <td>TEXT</td>
+                    <td>否</td>
+                    <td>线段颜色，颜色RGB，如#00FF00，默认为：#FF0000。</td>
+                </tr>
+                <tr>
+                    <td>LStyle</td>
+                    <td>TEXT</td>
+                    <td>否</td>
+                    <td>线型，dash虚线，solid实线，默认为：solid</td>
+                </tr>
+                <tr>
+                    <td>LWeight</td>
+                    <td>SINGLE</td>
+                    <td>否</td>
+                    <td>线宽，默认为：1</td>
+                </tr>
+                <tr>
+                    <td>Transpatecy</td>
+                    <td>SINGLE</td>
+                    <td>否</td>
+                    <td>透明度，值域范围：0 -----100;默认为：100</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据完整性说明：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>线段标识是主要标识；</p>
+            <p>图层名称指定线段所在图层（业务系统维护）；</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>流转方式：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>由业务系统产生，不在其他系统中流转。</p>
+        </div>
+    </div>
+</div>

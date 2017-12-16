@@ -5,6 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
        default-autowire="byName">
 
+    <!--开放平台数据库-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${db.oracle.connection.driver_class}"/>
         <property name="url" value="${db.connection.url}"/>
@@ -22,7 +23,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan">
             <list>
-                <value>com.gaeainfo.module.*.bo</value>
+                <value>com.gaeainfo.module.*.entity</value>
             </list>
         </property>
         <property name="hibernateProperties" ref="hibernateProperties"/>
@@ -33,6 +34,7 @@
         <property name="defaultTimeout" value="5000"/>
     </bean>
 
+    <!--确定 aop 注解生效  -->
     <aop:aspectj-autoproxy expose-proxy="true"/>
 
     <tx:annotation-driven transaction-manager="txManager"/>
@@ -61,5 +63,62 @@
     <aop:config>
         <aop:pointcut id="gaeaServiceOperation" expression="execution(* com.gaeainfo.module..service.*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="gaeaServiceOperation"/>
+    </aop:config>
+
+
+    <!--连一标三实数据库-->
+    <bean id="ybssDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${db.oracle.connection.driver_class}"/>
+        <property name="url" value="${db.oracle.connection.url1}"/>
+        <property name="username" value="${db.oracle.connection.username1}"/>
+        <property name="password" value="${db.oracle.connection.password1}"/>
+        <!-- 连接池启动时的初始值 -->
+        <property name="initialSize" value="5"/>
+        <!-- 最大空闲值.当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止 -->
+        <property name="maxIdle" value="2"/>
+        <!--  最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请 -->
+        <property name="minIdle" value="1"/>
+    </bean>
+
+    <bean id="ybssSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="ybssDataSource"/>
+        <!--<property name="packagesToScan">-->
+        <!--<list>-->
+        <!--<value>com.gaeainfo.module.login.entity</value>-->
+        <!--</list>-->
+        <!--</property>-->
+        <property name="hibernateProperties" ref="hibernateProperties"/>
+    </bean>
+
+    <bean id="ybssTxManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="ybssSessionFactory"/>
+        <property name="defaultTimeout" value="5000"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="ybssTxManager"/>
+    <tx:advice id="ybssTxAdvice" transaction-manager="ybssTxManager">
+        <tx:attributes>
+            <tx:method name="get*" propagation="SUPPORTS" timeout="10" read-only="true"/>
+            <tx:method name="query*" propagation="SUPPORTS" timeout="10" read-only="true"/>
+            <tx:method name="search*" propagation="SUPPORTS" timeout="10" read-only="true"/>
+            <tx:method name="find*" propagation="SUPPORTS" timeout="10" read-only="true"/>
+            <tx:method name="list*" propagation="SUPPORTS" timeout="10" read-only="true"/>
+            <tx:method name="count*" propagation="SUPPORTS" timeout="10" read-only="true"/>
+            <tx:method name="exist*" propagation="SUPPORTS" timeout="10" read-only="true"/>
+            <tx:method name="add*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="create*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="insert*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="save*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="del*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="remove*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="modify*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="execute*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="*" propagation="SUPPORTS" timeout="10" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="ybssServiceOperation" expression="execution(* com.gaeainfo.ybss.login.service.*.*(..))"/>
+        <aop:advisor advice-ref="ybssTxAdvice" pointcut-ref="ybssServiceOperation"/>
     </aop:config>
 </beans>

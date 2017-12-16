@@ -7,8 +7,8 @@
     <meta name="renderer" content="webkit">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width; initial-scale=1.0">
-    <title>徐州PGIS开放平台</title>
-
+    <title>徐州公安地理大数据平台</title>
+    <link rel="icon" href="./assets/images/logo.png" type="image/x-icon"/>
     <link rel="stylesheet" href="./libs/gm/gl/gl.css" />
     <link rel="stylesheet" href="./libs/iview/iview.css" />
     <link rel="stylesheet" href="./css/global.css" />
@@ -16,6 +16,7 @@
 
     <script type="text/javascript" src="./libs/gm/gl/gl.js"></script>
     <script type="text/javascript" src="./libs/iview/iview.min.js"></script>
+    <script type="text/javascript" src="libs/axios/axios.min.js"></script>
     <script type="text/javascript" src="libs/jquery/js/jquery-2.1.1.min.js"></script>
 
     <script src="libs/vue-router.js"></script>
@@ -23,7 +24,6 @@
     <script src="libs/vue-script2.js"></script>
 
 </head>
-
 
 <body>
     <!--container-->
@@ -39,10 +39,10 @@
                         </gaea-menu-item>
                     </div>
                     <div class="layout-user" v-text="userName" @mouseover="hideNavItem"></div>
-                    <div v-if="needLogin" class="login" @click="login" @mouseover="hideNavItem"></div>
-                    <div v-else class="logout" @click="logout" @mouseover="hideNavItem"></div>
+                    <div v-if="needLogin" class="login" @click="login" @mouseover="hideNavItem" title="去登录"></div>
+                    <div v-else class="logout" @click="logout" @mouseover="hideNavItem" title="取消登录"></div>
                 </gaea-menu>
-                <gaea-menu mode="horizontal" v-if='navItemsShow'>
+                <gaea-menu mode="horizontal" v-if='navItemsShow' @on-select="navSelect">
                     <transition name="fade">
                         <div class="layout-assistant" v-if="navItemsShow" @mouseover="showNavItem('selectNavItem')">
                             <div style="display:inline-block;">

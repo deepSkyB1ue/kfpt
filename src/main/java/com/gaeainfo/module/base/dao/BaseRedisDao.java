@@ -30,8 +30,6 @@ public class BaseRedisDao {
             String _value = JSON.toJSONString(object);
             redisTemplate.opsForValue().set(_key, _value, timeout, TimeUnit.SECONDS);
         }
-
-
     }
 
     /**

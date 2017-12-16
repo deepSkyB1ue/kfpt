@@ -1,0 +1,62 @@
+<div>
+    <div class="textBody">
+        <p>系统主要使用八种标准数据类型，主要有：LOGICAL、LONG、DOUBLE、CURRENCY、DATE、BINARY、TEXT、GUID。它们的含义、取值范围、格式和默认值如下：</p>
+    </div>
+    <div>
+        <div class="boxFlex">
+            <p>LOGICAL</p>
+            <p>逻辑型，值为：true或false，不能为空且必须为小写，默认值false。</p>
+        </div>
+        <div class="boxFlex">
+            <p>LONG</p>
+            <p>整数型，数据位数在设计时不限长度，不能为空，默认值0。</p>
+        </div>
+        <div class="boxFlex">
+            <p>SINGLE</p>
+            <p>SINGLE 类型，取值范围：４个字节。经纬度数据，小数点后保留六位小数，默认值为0。</p>
+        </div>
+        <div class="boxFlex">
+            <p>DOUBLE</p>
+            <p>小数型，数据位数和小数位数在设计时不限长度，不能为空，默认值0.0。</p>
+        </div>
+        <div class="boxFlex">
+            <p>CURRENCY</p>
+            <p>货币型，仅含两位小数的数据，不能为空，默认值0.00。</p>
+        </div>
+        <div class="boxFlex">
+            <p>DATE</p>
+            <p>日期型，格式为“YYYY-MM-DD HH:MM:SS”，默认值为空。</p>
+        </div>
+        <div class="boxFlex">
+            <p>BINARY</p>
+            <p>二进制型，二进制数据的BASE64编码，默认值为空。</p>
+        </div>
+        <div class="boxFlex">
+            <p>TEXT</p>
+            <p>文本型，长度不限，默认值为空。</p>
+        </div>
+        <div class="boxFlex">
+            <p>GUID</p>
+            <p>GUID</p>
+        </div>
+    </div>
+    <div class="textBody">
+        <p>扩展数据类型及其格式。扩展数据类型主要有车辆位置数据、多媒体数据。</p>
+    </div>
+    <div class="textBody">
+        <p>1.多媒体数据，用于描述一组文件数据，由于涉及多个文件数据，附件数据由两级节点组成。数据格式例子：</p>
+    </div>
+    <div class="textBodyData">
+        <p>&lt;MediaFile Type="文件类型" Comment="多媒体文件信息"&gt;</p>
+        <p>&lt;FileInfo Descript="说明" Ext="扩展名" MIME="数据格式描述"&gt;文件数据的二进制的BASE64编码&lt;/FileInfo&gt;</p>
+        <p>&lt;FileInfo Descript="说明" Ext="扩展名" MIME="数据格式描述"&gt;文件数据的二进制的BASE64编码&lt;/FileInfo&gt;</p>
+        <p>……//数据可以重复出现</p>
+    </div>
+    <div class="textBody">
+        <p>XX系统中的应用标识统一为："XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"。</p>
+    </div>
+    <div class="textBody">
+        <p>元数据唯一标示统一命名为Guid，类型为GUID；与元数据有关联的关联标示以“关联数据”+Guid的方式命名关联标示。</p>
+    </div>
+</div>
+

@@ -1,0 +1,135 @@
+<div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据名称：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>矩形元素数据信息，维护矩形元素数据的基本信息，包括：颜色、透明度设定。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据类型代码：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>DrawRectangle</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据定义：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>图层名称、自动缩放、自动居中、最小点、最大点、颜色、透明度。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据格式：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>&lt;Document TaskGuid="组件标识" DataGuid="数据标识" DataType=" DrawRectangle "&gt;</p>
+            <p>&lt;LName Type = "TEXT"&gt;用来显示矩形的图层名称&lt;/LName&gt;</p>
+            <p>&lt;AutoZoom Type =”TEXT”&gt;是否自动缩放1：是，0：否（可选，默认为1）&lt;/AutoZoom&gt;</p>
+            <p>&lt;AutoPan Type =”TEXT”&gt;是否自动居中1：是，0：否（可选，默认为1）&lt;/AutoPan&gt;</p>
+            <p>&lt;Transpatecy Type = " SINGLE &gt;透明度（例：0.8，可选，默认为1）&lt;/Transpatecy&gt;</p>
+            <p>&lt;RData&gt;</p>
+            <p>&lt;Guid Type=”GUID”&gt;面ID&lt;/Guid&gt;</p>
+            <p>&lt;LTLON Type="SINGLE"&gt;左上角经度&lt;/LTLON&gt;</p>
+            <p>&lt;LTLAT Type="SINGLE"&gt;左上角纬度&lt;/LTLAT&gt;</p>
+            <p>&lt;RDLON Type="SINGLE"&gt;右下角经度&lt;/RDLON&gt;</p>
+            <p>&lt;RDLAT Type="SINGLE"&gt;右下角纬度&lt;/RDLAT&gt;</p>
+            <p>&lt;RColor Type = "TEXT"&gt;矩形颜色（#RGB，例：#00FF00，可选，默认为#FF0000）&lt;/RColor&gt;</p>
+            <p>&lt;/RData&gt;</p>
+            <p>…（数据可重复多次出现）</p>
+            <p>&lt;/Document&gt;</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据描述：</p>
+        </div>
+        <div class="textBody_explain" style="width: 86%;padding-top: 16px;">
+            <table valign="center" align="center" border="1" width="100%">
+                <thead>
+                <tr>
+                    <td>节点名称</td>
+                    <td>类型</td>
+                    <td>是否必填</td>
+                    <td>含义</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>LName</td>
+                    <td>Text</td>
+                    <td>是</td>
+                    <td>用来显示矩形元素的图层名称。</td>
+                </tr>
+                <tr>
+                    <td>AutoZoom</td>
+                    <td>TEXT</td>
+                    <td>否</td>
+                    <td>
+                        <div>设置是否自动缩放地图比例。</div>
+                        <div>0：否；</div>
+                        <div>1：是；</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>AutoPan</td>
+                    <td>TEXT</td>
+                    <td>否</td>
+                    <td>
+                        <div>是否自动居中。</div>
+                        <div>0：否；</div>
+                        <div>1：是；</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Guid</td>
+                    <td>GUID</td>
+                    <td>是</td>
+                    <td>矩形元素信息的唯一标识（Guid）</td>
+                </tr>
+                <tr>
+                    <td>LTLON</td>
+                    <td>SINGLE</td>
+                    <td>是</td>
+                    <td>左上角经度</td>
+                </tr>
+                <tr>
+                    <td>LTLAT</td>
+                    <td>SINGLE</td>
+                    <td>是</td>
+                    <td>左上角纬度</td>
+                </tr>
+                <tr>
+                    <td>RDLON</td>
+                    <td>SINGLE</td>
+                    <td>是</td>
+                    <td>右下角经度</td>
+                </tr>
+                <tr>
+                    <td>RDLAT</td>
+                    <td>SINGLE</td>
+                    <td>是</td>
+                    <td>右下角纬度</td>
+                </tr>
+                <tr>
+                    <td>RColor</td>
+                    <td>TEXT</td>
+                    <td>否</td>
+                    <td>矩形元素颜色，颜色RGB，如#00FF00，默认为：#FF0000。</td>
+                </tr>
+                <tr>
+                    <td>Transpatecy</td>
+                    <td>SINGLE</td>
+                    <td>否</td>
+                    <td>透明度，值域范围：0 -----100;默认为：100</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

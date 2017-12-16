@@ -1,0 +1,106 @@
+<div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据名称：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>指定地图底图的服务路径，包括：地图服务路径设定。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据类型代码：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>MapServer</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据定义：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>地图服务路径。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据格式：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>&lt;Document TaskGuid="组件标识" DataGuid="数据标识" DataType="MapServer"&gt;</p>
+            <p>&lt;AutoZoom Type =”TEXT”&gt;是否自动缩放1：是，0：否（可选，默认为1）&lt;/AutoZoom&gt;</p>
+            <p>&lt;AutoPan Type =”TEXT”&gt;是否自动居中1：是，0：否（可选，默认为1）&lt;/AutoPan&gt;</p>
+            <p>&lt;MData&gt;</p>
+            <p>&lt;MName Type = "TEXT"&gt;szmap(地图服务名)&lt;/MName&gt;</p>
+            <p>&lt;MServer Type = "TEXT"&gt;http://gisserver.szjt.cn:8092/arcgis/services(服务地址)&lt;/MServer&gt;</p>
+            <p>&lt;MScaleLevel Type = "TEXT">&gt;320000,160000,80000,40000,20000,10000,5000,2500(地图服务比例尺列表，BS可选)&lt;/MScaleLevel&gt;</p>
+            <p>&lt;/MData&gt;</p>
+            <p>&lt;/Document&gt;</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据描述：</p>
+        </div>
+        <div class="textBody_explain" style="width: 86%;padding-top: 16px;">
+            <table valign="center" align="center" border="1" width="100%">
+                <thead>
+                <tr>
+                    <td>节点名称</td>
+                    <td>类型</td>
+                    <td>是否必填</td>
+                    <td>含义</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>LName</td>
+                    <td>Text</td>
+                    <td>是</td>
+                    <td>用来显示面元素的图层名称。</td>
+                </tr>
+                <tr>
+                    <td>AutoZoom</td>
+                    <td>TEXT</td>
+                    <td>否</td>
+                    <td>
+                        <div>设置是否自动缩放地图比例。</div>
+                        <div>0：否；</div>
+                        <div>1：是；</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>AutoPan</td>
+                    <td>TEXT</td>
+                    <td>否</td>
+                    <td>
+                        <div>是否自动居中。</div>
+                        <div>0：否；</div>
+                        <div>1：是；</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>MName</td>
+                    <td>TEXT</td>
+                    <td>是</td>
+                    <td>地图服务名称</td>
+                </tr>
+                <tr>
+                    <td>MServer</td>
+                    <td>TEXT</td>
+                    <td>是</td>
+                    <td>服务地址</td>
+                </tr>
+                <tr>
+                    <td>MScaleLevel</td>
+                    <td>TEXT</td>
+                    <td>是</td>
+                    <td>比例尺列表</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

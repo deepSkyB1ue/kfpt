@@ -1,0 +1,232 @@
+<div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据名称：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>GIS地图中图层信息。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据类型代码：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>AddLayer、RemoveLayer、ClearLayer、HiddenLayer、LayersInfo</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据定义：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>图层标识、图层名称、显示状态。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据格式：</p>
+        </div>
+        <div style=" display: flex;flex-direction: column;ustify-content: space-between;">
+            <div style="display: flex;align-items: flex-start;">
+                <div class="textBody">
+                    <p>新增图层：</p>
+                </div>
+                <div class="textBody_explain">
+                    <p>&lt;Document TaskGuid="组件标识" DataGuid="图层标识" DataType="AddLayer"&gt;</p>
+                    <p>&lt;LName Type = "Text"&gt;图层名&lt;/LName&gt;</p>
+                    <p>&lt;LType Type = "Text"&gt;图层类型（Point、Line、Polygon）&lt;/LName&gt;</p>
+                    <p>…（数据可重复多次出现）</p>
+                    <p>&lt;/Document&lt;</p>
+                </div>
+            </div>
+            <div style="display: flex;align-items: flex-start;">
+                <div class="textBody">
+                    <p>注销图层：</p>
+                </div>
+                <div class="textBody_explain">
+                    <p>&lt;Document TaskGuid="组件标识" DataGuid="图层标识" DataType="RemoveLayer"&gt;</p>
+                    <p>&lt;LName Type = "Text"&gt;图层名&lt;/LName&gt;</p>
+                    <p>…（数据可重复多次出现）</p>
+                    <p>&lt;/Document&gt;</p>
+                </div>
+            </div>
+            <div style="display: flex;align-items: flex-start;">
+                <div class="textBody">
+                    <p>清空图层：</p>
+                </div>
+                <div class="textBody_explain">
+                    <p>&lt;Document TaskGuid="组件标识" DataGuid="图层标识" DataType="ClearLayer"&gt;</p>
+                    <p>&lt;LName Type = "Text"&gt;图层名&lt;/LName&gt;</p>
+                    <p>…（数据可重复多次出现）</p>
+                    <p>&lt;/Document&gt;</p>
+                </div>
+            </div>
+            <div style="display: flex;align-items: flex-start;">
+                <div class="textBody">
+                    <p>隐藏显示图层：</p>
+                </div>
+                <div class="textBody_explain">
+                    <p>&lt;Document TaskGuid="组件标识" DataGuid="图层标识" DataType="HiddenLayer"&gt;</p>
+                    <p>&lt;LayerInfo&gt;</p>
+                    <p>&lt;LName Type = "Text"&gt;图层名&lt;/LName&gt;</p>
+                    <p>&lt;Hidden Type =”TEXT"&gt;隐藏显示图层（0：隐藏；1：显示）&lt;/Hidden&gt;</p>
+                    <p>&lt;/LayerInfo&gt;</p>
+                    <p>…（数据可重复多次出现）</p>
+                    <p><&lt;/Document&gt;</p>
+                </div>
+            </div>
+            <div style="display: flex;align-items: flex-start;">
+                <div class="textBody">
+                    <p>获得图层信息：</p>
+                </div>
+                <div class="textBody_explain">
+                    <p>&lt;Document TaskGuid="组件标识" DataGuid="图层标识" DataType="LayersInfo"&gt;</p>
+                    <p>&lt;LayerInfo&gt;</p>
+                    <p>&lt;LName Type = "Text"&gt;图层名&lt;/LName&gt;</p>
+                    <p>&lt;Hidden Type =”TEXT"&gt;隐藏显示图层（0：隐藏；1：显示）&lt;/Hidden&gt;</p>
+                    <p>&lt;/LayerInfo&gt;</p>
+                    <p>…（数据可重复多次出现）</p>
+                    <p><&lt;/Document&gt;</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据描述：</p>
+        </div>
+        <div class="textBody_explain" style="width: 86%;padding-top: 16px;">
+            <table valign="center" align="center" border="1" width="100%">
+                <thead>
+                <tr>
+                    <td>节点名称</td>
+                    <td>类型</td>
+                    <td>是否必填</td>
+                    <td>含义</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>ID</td>
+                    <td>TEXT</td>
+                    <td>是</td>
+                    <td>图层唯一标识</td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>TEXT</td>
+                    <td>是</td>
+                    <td>图层唯一标识</td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>TEXT</td>
+                    <td>是</td>
+                    <td>图层名称</td>
+                </tr>
+                <tr>
+                    <td>Hidden</td>
+                    <td>TEXT</td>
+                    <td>否</td>
+                    <td>是否显示图层</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据格式：</p>
+        </div>
+        <div style=" display: flex;flex-direction: column;ustify-content: space-between;">
+            <div style="display: flex;align-items: flex-start;">
+                <div class="textBody">
+                    <p>新增图层：</p>
+                </div>
+                <div class="textBody_explain">
+                    <p>&lt;Document TaskGuid="组件标识" DataGuid="图层标识" DataType="AddLayer"&gt;</p>
+                    <p>&lt;LName Type = "Text"&gt;图层名&lt;/LName&gt;</p>
+                    <p>&lt;LType Type = "Text"&gt;图层类型（Point、Line、Polygon）&lt;/LName&gt;</p>
+                    <p>…（数据可重复多次出现）</p>
+                    <p>&lt;/Document&lt;</p>
+                </div>
+            </div>
+            <div style="display: flex;align-items: flex-start;">
+                <div class="textBody">
+                    <p>注销图层：</p>
+                </div>
+                <div class="textBody_explain">
+                    <p>&lt;Document TaskGuid="组件标识" DataGuid="图层标识" DataType="RemoveLayer"&gt;</p>
+                    <p>&lt;LName Type = "Text"&gt;图层名&lt;/LName&gt;</p>
+                    <p>…（数据可重复多次出现）</p>
+                    <p>&lt;/Document&gt;</p>
+                </div>
+            </div>
+            <div style="display: flex;align-items: flex-start;">
+                <div class="textBody">
+                    <p>清空图层：</p>
+                </div>
+                <div class="textBody_explain">
+                    <p>&lt;Document TaskGuid="组件标识" DataGuid="图层标识" DataType="ClearLayer"&gt;</p>
+                    <p>&lt;LName Type = "Text"&gt;图层名&lt;/LName&gt;</p>
+                    <p>…（数据可重复多次出现）</p>
+                    <p>&lt;/Document&gt;</p>
+                </div>
+            </div>
+            <div style="display: flex;align-items: flex-start;">
+                <div class="textBody">
+                    <p>隐藏显示图层：</p>
+                </div>
+                <div class="textBody_explain">
+                    <p>&lt;Document TaskGuid="组件标识" DataGuid="图层标识" DataType="HiddenLayer"&gt;</p>
+                    <p>&lt;LayerInfo&gt;</p>
+                    <p>&lt;LName Type = "Text"&gt;图层名&lt;/LName&gt;</p>
+                    <p>&lt;Hidden Type =”TEXT"&gt;隐藏显示图层（0：隐藏；1：显示）&lt;/Hidden&gt;</p>
+                    <p>&lt;/LayerInfo&gt;</p>
+                    <p>…（数据可重复多次出现）</p>
+                    <p><&lt;/Document&gt;</p>
+                </div>
+            </div>
+            <div style="display: flex;align-items: flex-start;">
+                <div class="textBody">
+                    <p>获得图层信息：</p>
+                </div>
+                <div class="textBody_explain">
+                    <p>&lt;Document TaskGuid="组件标识" DataGuid="图层标识" DataType="LayersInfo"&gt;</p>
+                    <p>&lt;LayerInfo&gt;</p>
+                    <p>&lt;LName Type = "Text"&gt;图层名&lt;/LName&gt;</p>
+                    <p>&lt;Hidden Type =”TEXT"&gt;隐藏显示图层（0：隐藏；1：显示）&lt;/Hidden&gt;</p>
+                    <p>&lt;/LayerInfo&gt;</p>
+                    <p>…（数据可重复多次出现）</p>
+                    <p><&lt;/Document&gt;</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据完整性说明：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>图层标识是图层的唯一标识；</p>
+            <p>图层类型；</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>流转方式：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>图层信息由GIS系统产生，不在其他系统中流转。</p>
+        </div>
+    </div>
+    <div style="display: flex;align-items: flex-start;">
+        <div class="textBody">
+            <p>数据生成的频度：</p>
+        </div>
+        <div class="textBody_explain">
+            <p>根据应用需求产生。</p>
+        </div>
+    </div>
+</div>

@@ -482,19 +482,22 @@ module.exports = {
     color: #fff;
 }
 .g-mn .home7 span {
-    display: block;
-    width: 1024px;
-    margin: 50px 0 -4px 0;
+    display:inline-block;
+    width:100%;
+    height:360.8px;
+    margin:50px 0 0 0;
     overflow: hidden;
 }
 .g-mn .home7 span img {
     width: 1024px;
+    height:360.8px;
     transition: all 0.6s;
 }
 .g-mn .home7 span img:hover {
     transform: scale(1.2);
 }
 .g-mn .home8 {
+    margin-top:-8px;
     padding: 0 !important;
     text-align: center;
     height: 450px;

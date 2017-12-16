@@ -18,6 +18,7 @@ router.beforeEach(function (to, from, next) {
 });
 
 const routersMap = {
+    '/login': './login.html',
     '/': 'modules/home/home.vue',
     '/home': 'modules/home/home.vue',
     '/module5': 'modules/module5/module5.vue',
@@ -26,8 +27,9 @@ const routersMap = {
     '/module8': 'modules/module8/module8.vue',
     '/module9': 'modules/module9/module9.vue',
     '/station': 'modules/station/station.vue',
-    '/webkf': 'modules/station/station.vue',
-    '/sqmy': 'modules/sqmy/sqmy.vue',
+    '/webkf': 'modules/documents/web/webDoc.vue',
+    '/Androidkf': 'modules/documents/web/AndroidDoc.vue',
+    '/sqmy': 'modules/sqmy/sqmy.vue'
 };
 
 const navList = [

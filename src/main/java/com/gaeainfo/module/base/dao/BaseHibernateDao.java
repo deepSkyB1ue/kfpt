@@ -1,5 +1,7 @@
 package com.gaeainfo.module.base.dao;
 
+import com.gaeainfo.framework.core.utils.common.GaeaCommonUtil;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
@@ -45,12 +47,12 @@ public class BaseHibernateDao {
 // -------------------- 基本检索、增加、修改、删除操作 --------------------
 
     // 根据主键获取实体。如果没有相应的实体，返回 null。
-    public <T> T get(Class<T> clazz,    Serializable id) {
-        return  hibernateTemplate.get(clazz, id);
+    public <T> T get(Class<T> clazz, Serializable id) {
+        return hibernateTemplate.get(clazz, id);
     }
 
     // 根据主键获取实体。如果没有相应的实体，抛出异常。
-    public <T> T load(Class<T> clazz,Serializable id) {
+    public <T> T load(Class<T> clazz, Serializable id) {
         return hibernateTemplate.load(clazz, id);
     }
 
@@ -84,8 +86,8 @@ public class BaseHibernateDao {
     }
 
     // 根据主键删除指定实体
-    public void deleteByKey(Class clazz,Serializable id) {
-        this.delete(this.load(clazz,id));
+    public void deleteByKey(Class clazz, Serializable id) {
+        this.delete(this.load(clazz, id));
     }
 
     // -------------------- HSQL ----------------------------------------------
@@ -158,7 +160,7 @@ public class BaseHibernateDao {
 
     public Object findObjByCriteria(DetachedCriteria criteria) {
         List list = hibernateTemplate.findByCriteria(criteria);
-        return list.size()==0?null:list.get(0);
+        return list.size() == 0 ? null : list.get(0);
     }
 
     // 检索满足标准的数据，返回指定范围的记录
@@ -206,10 +208,9 @@ public class BaseHibernateDao {
 
     //--------------------------------- 原生SQL---------------------------------
 
-    public <T> List<T> findListBySQL(final String sql,Class<T> clzss){
+    public <T> List<T> findListBySQL(final String sql, Class<T> clzss) {
         ResultTransformer resultTransformer = Transformers.aliasToBean(clzss);
         return sessionFactory.getCurrentSession().createSQLQuery(sql).setResultTransformer(resultTransformer).list();
-
     }
 
     public <T> T findObjBySQL(final String sql, Class<T> clzss) {
@@ -220,5 +221,28 @@ public class BaseHibernateDao {
         } else {
             return list.get(0);
         }
+    }
+
+    public final List<Object[]> queryListBySql(final String sql) throws Exception {
+        SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(sql);
+        List<Object[]> dataList = sqlQuery.list();
+        return dataList;
+    }
+
+    /**
+     * 软删除
+     *
+     * @param str
+     * @param tableName
+     * @throws Exception
+     */
+    public void deleteByPidAndTableName(String str, String tableName, String... updaterId) throws Exception {
+        String sql = "";
+        if ("" == GaeaCommonUtil.trimToEmpty(updaterId)) {
+            sql = "UPDATE " + tableName + " T SET T.Delflag=1 WHERE T.PID = '" + str + "'";
+        } else {
+            sql = "UPDATE " + tableName + " T SET T.Delflag=1,t.updaterid='" + updaterId + "',T.updatetime=to_char(sysdate,'yyyy-mm-dd hh24:mi:ss') WHERE T.PID = '" + str + "'";
+        }
+        this.getSession().createSQLQuery(sql).executeUpdate();
     }
 }
